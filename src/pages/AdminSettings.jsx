@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useHotel } from '../context/HotelContext'
 import './AdminSettings.css'
 
 export default function AdminSettings() {
   const { staff, addStaff, removeStaff, settings, updateSettings, roomTypes, saveRoomType, addToast } = useHotel()
+  const navigate = useNavigate()
   
   const [newStaff, setNewStaff] = useState({ name: '', role: 'Housekeeper' })
   const [editingPricing, setEditingPricing] = useState(false)
@@ -45,7 +47,7 @@ export default function AdminSettings() {
           <div className="admin-brand">
             <h1>⚙️ Admin Settings</h1>
           </div>
-          <button className="admin-nav-back" onClick={() => window.location.href = '/dashboard'}>← Back to Home</button>
+          <button className="admin-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
         </div>
       </header>
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useHotel, timeAgo } from '../context/HotelContext'
 import './MaintenanceDashboard.css'
 
 export default function MaintenanceDashboard() {
   const { maintenanceTickets, updateTicketStatus, addToast } = useHotel()
+  const navigate = useNavigate()
   const [filter, setFilter] = useState('all')
 
   const handleStatusChange = (ticketId, newStatus) => {
@@ -63,7 +65,7 @@ export default function MaintenanceDashboard() {
           <div className="mdash-brand">
             <h1>🛠️ Maintenance & Engineering</h1>
           </div>
-          <button className="mdash-nav-back" onClick={() => window.location.href = '/dashboard'}>← Back to Home</button>
+          <button className="mdash-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
         </div>
       </header>
       

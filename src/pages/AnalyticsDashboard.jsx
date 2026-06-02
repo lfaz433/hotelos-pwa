@@ -1,10 +1,12 @@
 import React from 'react'
 import { useHotel } from '../context/HotelContext'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line } from 'recharts'
+import { useNavigate } from 'react-router-dom'
 import './AnalyticsDashboard.css'
 
 export default function AnalyticsDashboard() {
   const { rooms, bookings, auditLogs } = useHotel()
+  const navigate = useNavigate()
 
   // 1. Occupancy Metric
   const occupiedCount = rooms.filter(r => r.status === 'occupied').length
@@ -49,7 +51,7 @@ export default function AnalyticsDashboard() {
           <div className="adash-brand">
             <h1>📈 Analytics & Reports</h1>
           </div>
-          <button className="adash-nav-back" onClick={() => window.location.href = '/dashboard'}>← Back to Home</button>
+          <button className="adash-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
         </div>
       </header>
       

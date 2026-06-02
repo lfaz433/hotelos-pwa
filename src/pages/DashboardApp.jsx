@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import SkeletonLoader from '../components/shared/SkeletonLoader'
 import DBNavBar from '../components/dashboard/DBNavBar'
 import DBOverviewTab from '../components/dashboard/DBOverviewTab'
@@ -16,6 +16,7 @@ const TABS = ['overview', 'reservations', 'analytics', 'settings']
 export default function DashboardApp() {
   const [activeTab, setActiveTab] = useState('overview')
   const [isLoading, setIsLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Faux initial data load
@@ -25,10 +26,10 @@ export default function DashboardApp() {
   }, [])
 
   const handleTabChange = (tab) => {
-    if (tab === 'housekeeping') window.location.href = '/supervisor'
-    else if (tab === 'inventory') window.location.href = '/inventory'
-    else if (tab === 'analytics') window.location.href = '/analytics'
-    else if (tab === 'settings') window.location.href = '/admin'
+    if (tab === 'housekeeping') navigate('/supervisor')
+    else if (tab === 'inventory') navigate('/inventory')
+    else if (tab === 'analytics') navigate('/analytics')
+    else if (tab === 'settings') navigate('/admin')
     else setActiveTab(tab)
   }
 

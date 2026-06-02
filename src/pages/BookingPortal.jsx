@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useHotel } from '../context/HotelContext'
 import RoomDetailsDrawer from '../components/public/RoomDetailsDrawer'
 import ConciergeChatbot from '../components/public/ConciergeChatbot'
@@ -10,6 +11,7 @@ export default function BookingPortal() {
   const { rooms, bookings, roomTypes, addBooking } = useHotel()
   
   const roomTypesArray = useMemo(() => Object.values(roomTypes), [roomTypes])
+  const navigate = useNavigate()
   
   const [dates, setDates] = useState({ checkIn: '', checkOut: '' })
   const [guests, setGuests] = useState(1)
@@ -452,7 +454,7 @@ export default function BookingPortal() {
                 </div>
               </div>
 
-              <button className="bp-btn-home" onClick={() => window.location.href = '/'}>Return to Home</button>
+              <button className="bp-btn-home" onClick={() => navigate('/')}>Return to Home</button>
             </div>
           </section>
         )}

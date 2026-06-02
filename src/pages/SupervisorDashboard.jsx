@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useHotel, STATUS_LABELS } from '../context/HotelContext'
 import './SupervisorDashboard.css'
 
-export default function SupervisorDashboard() {
+export default function SupervisorDashboard({ embedded }) {
   const { rooms, staff, updateRoomStatus } = useHotel()
   const [filter, setFilter] = useState('all') // 'all', 'cleaning', 'dirty'
 
@@ -38,26 +38,28 @@ export default function SupervisorDashboard() {
   return (
     <div className="rdash-luxury-layout">
       {/* Top Navbar */}
-      <header className="rdash-lux-header">
-        <div className="rdash-lux-logo">
-          <div className="lux-logo-icon">H</div>
-          <div className="lux-logo-text">
-            <h1>HOTEL OS</h1>
-            <span>SUPERVISOR</span>
+      {!embedded && (
+        <header className="rdash-lux-header">
+          <div className="rdash-lux-logo">
+            <div className="lux-logo-icon">H</div>
+            <div className="lux-logo-text">
+              <h1>HOTEL OS</h1>
+              <span>CHEF OF GROUP</span>
+            </div>
           </div>
-        </div>
 
-        <div className="rdash-lux-user">
-          <div className="lux-user-info">
-            <span className="lux-name">Chef of Group</span>
-            <span className="lux-role">Quality Control</span>
+          <div className="rdash-lux-user">
+            <div className="lux-user-info">
+              <span className="lux-name">Chef of Group</span>
+              <span className="lux-role">Quality Control</span>
+            </div>
+            <div className="lux-avatar">S</div>
+            <Link to="/dashboard" className="lux-logout">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            </Link>
           </div>
-          <div className="lux-avatar">S</div>
-          <Link to="/" className="lux-logout">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-          </Link>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="rdash-lux-body">
         {/* Main Content */}

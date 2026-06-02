@@ -4,11 +4,13 @@ import SkeletonLoader from '../components/shared/SkeletonLoader'
 import DBNavBar from '../components/dashboard/DBNavBar'
 import DBOverviewTab from '../components/dashboard/DBOverviewTab'
 import DBReservationsTab from '../components/dashboard/DBReservationsTab'
-import DBAnalyticsTab from '../components/dashboard/DBAnalyticsTab'
-import DBActivityFeed from '../components/dashboard/DBActivityFeed'
 import DBTemplateManager from '../components/dashboard/DBTemplateManager'
-import DBSettingsTab from '../components/dashboard/DBSettingsTab'
 import DBRoomTypesTab from '../components/dashboard/DBRoomTypesTab'
+import DBActivityFeed from '../components/dashboard/DBActivityFeed'
+import SupervisorDashboard from './SupervisorDashboard'
+import InventoryDashboard from './InventoryDashboard'
+import AnalyticsDashboard from './AnalyticsDashboard'
+import AdminSettings from './AdminSettings'
 import './DashboardApp.css'
 
 const TABS = ['overview', 'reservations', 'analytics', 'settings']
@@ -26,11 +28,7 @@ export default function DashboardApp() {
   }, [])
 
   const handleTabChange = (tab) => {
-    if (tab === 'housekeeping') navigate('/supervisor')
-    else if (tab === 'inventory') navigate('/inventory')
-    else if (tab === 'analytics') navigate('/analytics')
-    else if (tab === 'settings') navigate('/admin')
-    else setActiveTab(tab)
+    setActiveTab(tab)
   }
 
   return (
@@ -51,10 +49,12 @@ export default function DashboardApp() {
             <>
               {activeTab === 'overview'      && <DBOverviewTab />}
               {activeTab === 'reservations'  && <DBReservationsTab />}
-              {activeTab === 'analytics'     && <DBAnalyticsTab />}
+              {activeTab === 'analytics'     && <AnalyticsDashboard embedded />}
+              {activeTab === 'housekeeping'  && <SupervisorDashboard embedded />}
+              {activeTab === 'inventory'     && <InventoryDashboard embedded />}
               {activeTab === 'templates'     && <DBTemplateManager />}
               {activeTab === 'room_types'    && <DBRoomTypesTab />}
-              {activeTab === 'settings'      && <DBSettingsTab />}
+              {activeTab === 'settings'      && <AdminSettings embedded />}
             </>
           )}
         </main>

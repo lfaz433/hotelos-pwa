@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGri
 import { useNavigate } from 'react-router-dom'
 import './AnalyticsDashboard.css'
 
-export default function AnalyticsDashboard() {
+export default function AnalyticsDashboard({ embedded }) {
   const { rooms, bookings, auditLogs } = useHotel()
   const navigate = useNavigate()
 
@@ -46,14 +46,16 @@ export default function AnalyticsDashboard() {
 
   return (
     <div className="adash-layout">
-      <header className="adash-header">
-        <div className="adash-h-inner">
-          <div className="adash-brand">
-            <h1>📈 Analytics & Reports</h1>
+      {!embedded && (
+        <header className="adash-header">
+          <div className="adash-h-inner">
+            <div className="adash-brand">
+              <h1>📈 Analytics & Reports</h1>
+            </div>
+            <button className="adash-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
           </div>
-          <button className="adash-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
-        </div>
-      </header>
+        </header>
+      )}
       
       <main className="adash-main">
         {/* KPI Cards */}

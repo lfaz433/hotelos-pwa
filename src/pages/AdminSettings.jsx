@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useHotel } from '../context/HotelContext'
 import './AdminSettings.css'
 
-export default function AdminSettings() {
+export default function AdminSettings({ embedded }) {
   const { staff, addStaff, removeStaff, settings, updateSettings, roomTypes, saveRoomType, addToast } = useHotel()
   const navigate = useNavigate()
   
@@ -42,14 +42,16 @@ export default function AdminSettings() {
 
   return (
     <div className="admin-layout">
-      <header className="admin-header">
-        <div className="admin-h-inner">
-          <div className="admin-brand">
-            <h1>⚙️ Admin Settings</h1>
+      {!embedded && (
+        <header className="admin-header">
+          <div className="admin-h-inner">
+            <div className="admin-brand">
+              <h1>⚙️ Admin Settings</h1>
+            </div>
+            <button className="admin-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
           </div>
-          <button className="admin-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
-        </div>
-      </header>
+        </header>
+      )}
 
       <main className="admin-main">
         <div className="admin-grid">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useHotel } from '../context/HotelContext'
 import './InventoryDashboard.css'
 
-export default function InventoryDashboard() {
+export default function InventoryDashboard({ embedded }) {
   const { inventory, restockItem } = useHotel()
   const [filter, setFilter] = useState('all') // 'all', 'low', 'critical'
   const [categoryFilter, setCategoryFilter] = useState('All')
@@ -66,26 +66,28 @@ export default function InventoryDashboard() {
   return (
     <div className="rdash-luxury-layout">
       {/* Top Navbar */}
-      <header className="rdash-lux-header">
-        <div className="rdash-lux-logo">
-          <div className="lux-logo-icon">H</div>
-          <div className="lux-logo-text">
-            <h1>HOTEL OS</h1>
-            <span>MAGASIN INVENTORY</span>
+      {!embedded && (
+        <header className="rdash-lux-header">
+          <div className="rdash-lux-logo">
+            <div className="lux-logo-icon">H</div>
+            <div className="lux-logo-text">
+              <h1>HOTEL OS</h1>
+              <span>MAGASIN INVENTORY</span>
+            </div>
           </div>
-        </div>
 
-        <div className="rdash-lux-user">
-          <div className="lux-user-info">
-            <span className="lux-name">Inventory Manager</span>
-            <span className="lux-role">Stock Control</span>
+          <div className="rdash-lux-user">
+            <div className="lux-user-info">
+              <span className="lux-name">Inventory Manager</span>
+              <span className="lux-role">Stock Control</span>
+            </div>
+            <div className="lux-avatar">M</div>
+            <Link to="/dashboard" className="lux-logout">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            </Link>
           </div>
-          <div className="lux-avatar">M</div>
-          <Link to="/" className="lux-logout">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-          </Link>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="rdash-lux-body">
         {/* Main Content */}

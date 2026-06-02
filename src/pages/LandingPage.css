@@ -28,7 +28,7 @@
 .landing__content {
   position: relative;
   z-index: 1;
-  max-width: 680px;
+  max-width: 900px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -96,6 +96,13 @@
   color: var(--text-primary);
 }
 
+.landing__card--guest {
+  background: rgba(0, 113, 194, 0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  backdrop-filter: blur(12px);
+}
+
 .landing__card:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 36px rgba(0,0,0,0.25);
@@ -103,6 +110,7 @@
 
 .landing__card--hk:hover { background: rgba(255,255,255,0.18); }
 .landing__card--db:hover { background: #fff; }
+.landing__card--guest:hover { background: rgba(0, 113, 194, 0.6); }
 
 .landing__card-icon {
   width: 56px;
@@ -114,7 +122,8 @@
   flex-shrink: 0;
 }
 
-.landing__card--hk .landing__card-icon {
+.landing__card--hk .landing__card-icon,
+.landing__card--guest .landing__card-icon {
   background: rgba(255,255,255,0.15);
   color: #fff;
 }
@@ -205,8 +214,20 @@
   background: rgba(255,255,255,0.2);
 }
 
-@media (min-width: 600px) {
-  .landing__cards { flex-direction: row; }
-  .landing__card { flex: 1; flex-direction: column; align-items: flex-start; }
-  .landing__card-arrow { position: absolute; bottom: var(--space-5); right: var(--space-5); }
+@media (min-width: 768px) {
+  .landing__cards { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+  .landing__card { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    height: 100%;
+  }
+  .landing__card-arrow { 
+    position: absolute; 
+    bottom: var(--space-5); 
+    right: var(--space-5); 
+  }
 }

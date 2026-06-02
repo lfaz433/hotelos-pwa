@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useHotel } from '../../context/HotelContext'
 import './DBNavBar.css'
@@ -14,8 +15,20 @@ const TABS = [
 ]
 
 export default function DBNavBar({ activeTab, onTabChange }) {
-  const { notifications, markNotificationsRead } = useHotel()
+  const { notifications, markNotificationsRead, activeStaff, logout } = useHotel()
   const unread = notifications.filter(n => !n.read).length
+  const [showDropdown, setShowDropdown] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <header className="db-navbar">
@@ -64,7 +77,27 @@ export default function DBNavBar({ activeTab, onTabChange }) {
             Housekeeping
           </Link>
 
-          <div className="db-user-avatar">AM</div>
+          <div className="db-user-dropdown-container" ref={dropdownRef}>
+            <div 
+              className="db-user-avatar" 
+              onClick={() => setShowDropdown(!showDropdown)}
+              title="Profile & Settings"
+            >
+              {activeStaff?.avatar || 'AM'}
+            </div>
+            {showDropdown && (
+              <div className="db-user-dropdown animate-in">
+                <div className="db-dropdown-header">
+                  <strong>{activeStaff?.name || 'Alice M.'}</strong>
+                  <span>{activeStaff?.role || 'General Manager'}</span>
+                </div>
+                <hr className="db-dropdown-divider" />
+                <button className="db-dropdown-item logout" onClick={logout}>
+                  Log Out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

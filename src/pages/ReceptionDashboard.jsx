@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useHotel, STATUS_LABELS } from '../context/HotelContext'
 import './ReceptionDashboard.css'
 
-export default function ReceptionDashboard() {
+export default function ReceptionDashboard({ embedded }) {
   const { rooms, updateRoomStatus, bookings, updateBooking } = useHotel()
   const [filter, setFilter] = useState('all')
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -78,31 +78,33 @@ export default function ReceptionDashboard() {
   return (
     <div className="rdash-luxury-layout">
       {/* Top Navbar */}
-      <header className="rdash-lux-header">
-        <div className="rdash-lux-logo">
-          <div className="lux-logo-icon">H</div>
-          <div className="lux-logo-text">
-            <h1>HOTEL OS</h1>
-            <span>FRONT DESK</span>
+      {!embedded && (
+        <header className="rdash-lux-header">
+          <div className="rdash-lux-logo">
+            <div className="lux-logo-icon">H</div>
+            <div className="lux-logo-text">
+              <h1>HOTEL OS</h1>
+              <span>FRONT DESK</span>
+            </div>
           </div>
-        </div>
-        
-        <div className="rdash-lux-clock">
-          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          <span>{currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' })}</span>
-        </div>
+          
+          <div className="rdash-lux-clock">
+            {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            <span>{currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' })}</span>
+          </div>
 
-        <div className="rdash-lux-user">
-          <div className="lux-user-info">
-            <span className="lux-name">Concierge</span>
-            <span className="lux-role">Active Shift</span>
+          <div className="rdash-lux-user">
+            <div className="lux-user-info">
+              <span className="lux-name">Concierge</span>
+              <span className="lux-role">Active Shift</span>
+            </div>
+            <div className="lux-avatar">C</div>
+            <Link to="/dashboard" className="lux-logout">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            </Link>
           </div>
-          <div className="lux-avatar">C</div>
-          <Link to="/" className="lux-logout">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-          </Link>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="rdash-lux-body">
         {/* Main Content */}

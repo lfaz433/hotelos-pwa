@@ -39,7 +39,7 @@ export default function LoginPortal() {
         targetRoute = '/dashboard'
       } else if (lowerUser === 'reception') {
         mockStaff = { id: 3, name: 'Sarah L.', role: 'reception' }
-        targetRoute = '/reception'
+        targetRoute = '/dashboard'
       } else if (lowerUser === 'supervisor') {
         mockStaff = { id: 4, name: 'Ana P.', role: 'supervisor' }
         targetRoute = '/supervisor'

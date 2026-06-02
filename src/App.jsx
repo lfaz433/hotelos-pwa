@@ -34,11 +34,7 @@ export default function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/reception" element={
-            <ProtectedRoute allowedRoles={['reception', 'manager']}>
-              <ReceptionDashboard />
-            </ProtectedRoute>
-          } />
+          <Route path="/reception" element={<Navigate to="/dashboard" replace />} />
 
           <Route path="/supervisor" element={
             <ProtectedRoute allowedRoles={['supervisor', 'manager']}>
@@ -53,7 +49,7 @@ export default function App() {
           } />
           
           <Route path="/dashboard/*" element={
-            <ProtectedRoute allowedRoles={['manager']}>
+            <ProtectedRoute allowedRoles={['manager', 'reception']}>
               <DashboardApp />
             </ProtectedRoute>
           } />

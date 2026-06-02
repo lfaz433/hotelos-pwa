@@ -11,12 +11,15 @@ import SupervisorDashboard from './SupervisorDashboard'
 import InventoryDashboard from './InventoryDashboard'
 import AnalyticsDashboard from './AnalyticsDashboard'
 import AdminSettings from './AdminSettings'
+import ReceptionDashboard from './ReceptionDashboard'
 import './DashboardApp.css'
 
 const TABS = ['overview', 'reservations', 'analytics', 'settings']
 
 export default function DashboardApp() {
-  const [activeTab, setActiveTab] = useState('overview')
+  const { activeStaff } = useHotel()
+  const isReception = activeStaff?.role === 'reception'
+  const [activeTab, setActiveTab] = useState(isReception ? 'frontdesk' : 'overview')
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
 
@@ -48,6 +51,7 @@ export default function DashboardApp() {
           ) : (
             <>
               {activeTab === 'overview'      && <DBOverviewTab />}
+              {activeTab === 'frontdesk'     && <ReceptionDashboard embedded />}
               {activeTab === 'reservations'  && <DBReservationsTab />}
               {activeTab === 'analytics'     && <AnalyticsDashboard embedded />}
               {activeTab === 'housekeeping'  && <SupervisorDashboard embedded />}

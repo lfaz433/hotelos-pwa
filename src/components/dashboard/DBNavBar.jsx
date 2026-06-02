@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom'
 import { useHotel } from '../../context/HotelContext'
 import './DBNavBar.css'
 
-const TABS = [
-  { key: 'overview',      label: 'Overview' },
-  { key: 'reservations',  label: 'Reservations' },
-  { key: 'housekeeping',  label: 'Housekeeping' },
-  { key: 'inventory',     label: 'Inventory & Audit' },
-  { key: 'analytics',     label: 'Analytics' },
-  { key: 'templates',     label: 'Template Manager' },
-  { key: 'room_types',    label: 'Room Types' },
-  { key: 'settings',      label: 'Settings' },
+const ALL_TABS = [
+  { key: 'overview',      label: 'Overview', showFor: ['manager'] },
+  { key: 'frontdesk',     label: 'Front Desk', showFor: ['manager', 'reception'] },
+  { key: 'reservations',  label: 'Reservations', showFor: ['manager', 'reception'] },
+  { key: 'housekeeping',  label: 'Housekeeping', showFor: ['manager'] },
+  { key: 'inventory',     label: 'Inventory & Audit', showFor: ['manager'] },
+  { key: 'analytics',     label: 'Analytics', showFor: ['manager'] },
+  { key: 'templates',     label: 'Template Manager', showFor: ['manager'] },
+  { key: 'room_types',    label: 'Room Types', showFor: ['manager'] },
+  { key: 'settings',      label: 'Settings', showFor: ['manager'] },
 ]
 
 export default function DBNavBar({ activeTab, onTabChange }) {
@@ -44,7 +45,7 @@ export default function DBNavBar({ activeTab, onTabChange }) {
         </div>
 
         <nav className="db-navbar__tabs" role="navigation" aria-label="Dashboard navigation">
-          {TABS.map(tab => (
+          {ALL_TABS.filter(t => t.showFor.includes(activeStaff?.role || 'manager')).map(tab => (
             <button
               key={tab.key}
               className={`db-tab ${activeTab === tab.key ? 'active' : ''}`}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useHotel } from '../context/HotelContext'
 import SkeletonLoader from '../components/shared/SkeletonLoader'
 import DBNavBar from '../components/dashboard/DBNavBar'
 import DBOverviewTab from '../components/dashboard/DBOverviewTab'

@@ -8,6 +8,7 @@ export default function ReceptionDashboard({ embedded }) {
   const [filter, setFilter] = useState('all')
   const [currentTime, setCurrentTime] = useState(new Date())
   const [checkoutModal, setCheckoutModal] = useState(null)
+  const [checkinModal, setCheckinModal] = useState(null)
 
   // Clock
   useEffect(() => {
@@ -44,13 +45,19 @@ export default function ReceptionDashboard({ embedded }) {
       const booking = bookings.find(b => b.roomId === roomId && b.status === 'active')
       setCheckoutModal({ room, booking })
     } else if (currentStatus === 'ready' || currentStatus === 'available') {
-      if (window.confirm('Check Guest In? This suite will be marked as occupied.')) {
-        updateRoomStatus(roomId, 'occupied')
-        const arrivalBooking = bookings.find(b => b.roomId === roomId && (b.status === 'arriving' || new Date(b.checkIn).toDateString() === today))
-        if (arrivalBooking) {
-          updateBooking({ ...arrivalBooking, status: 'active' })
-        }
+      const room = rooms.find(r => r.id === roomId)
+      const arrivalBooking = bookings.find(b => b.roomId === roomId && (b.status === 'arriving' || new Date(b.checkIn).toDateString() === today))
+      setCheckinModal({ room, booking: arrivalBooking })
+    }
+  }
+
+  const handleConfirmCheckin = () => {
+    if (checkinModal) {
+      updateRoomStatus(checkinModal.room.id, 'occupied')
+      if (checkinModal.booking) {
+        updateBooking({ ...checkinModal.booking, status: 'active' })
       }
+      setCheckinModal(null)
     }
   }
 
@@ -212,12 +219,37 @@ export default function ReceptionDashboard({ embedded }) {
         </aside>
       </div>
 
+      {/* Check-In Confirmation Modal */}
+      {checkinModal && checkinModal.room && (
+        <div className="inv-modal-overlay" onClick={() => setCheckinModal(null)}>
+          <div className="inv-modal-card" onClick={e => e.stopPropagation()}>
+            <div className="inv-modal-header" style={{background: '#1a7f4b'}}>
+              <h3 style={{margin: 0, color: 'white'}}>✅ Guest Check-In</h3>
+            </div>
+            <div className="inv-modal-body" style={{textAlign: 'center', padding: '24px'}}>
+              <h2 style={{margin: '0 0 4px'}}>{checkinModal.booking?.guest || 'Walk-in Guest'}</h2>
+              <p style={{color: '#666', margin: '0 0 8px'}}>Room {checkinModal.room.number} · {checkinModal.room.type}</p>
+              {checkinModal.booking && (
+                <p style={{color: '#888', fontSize: '13px', margin: '0 0 24px'}}>Conf: {checkinModal.booking.confirmationNo}</p>
+              )}
+              <div style={{background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px', padding: '14px', marginBottom: '20px', textAlign: 'left', fontSize: '14px', color: '#166534'}}>
+                Room will be marked as <strong>Occupied</strong> and removed from the available pool.
+              </div>
+              <div style={{display: 'flex', gap: '12px'}}>
+                <button style={{flex: 1, padding: '12px', border: '1px solid #ddd', borderRadius: '8px', background: 'white', cursor: 'pointer', fontWeight: '600'}} onClick={() => setCheckinModal(null)}>Cancel</button>
+                <button style={{flex: 2, padding: '12px', background: '#1a7f4b', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '15px'}} onClick={handleConfirmCheckin}>Confirm Check-In</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Checkout Invoice Modal */}
       {checkoutModal && checkoutModal.room && (
         <div className="inv-modal-overlay" onClick={() => setCheckoutModal(null)}>
           <div className="inv-modal-card" onClick={e => e.stopPropagation()}>
             <div className="inv-modal-header" style={{background: '#003580'}}>
-              <h3 style={{margin: 0, color: 'white', display: 'flex', alignItems: 'center', gap: '10px'}}>📄 Check-Out & Final Invoice</h3>
+              <h3 style={{margin: 0, color: 'white'}}>📄 Check-Out & Final Invoice</h3>
             </div>
             <div className="inv-modal-body" style={{textAlign: 'center', padding: '24px'}}>
               <h2 style={{margin: '0 0 5px 0'}}>{checkoutModal.booking?.guest || 'Walk-in Guest'}</h2>
@@ -226,7 +258,7 @@ export default function ReceptionDashboard({ embedded }) {
               <div style={{background: '#f8f9fa', padding: '15px', borderRadius: '12px', border: '1px solid #eee', marginBottom: '20px', textAlign: 'left'}}>
                 <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '14px'}}>
                   <span>Room Charges</span>
-                  <span>${checkoutModal.booking?.totalAmount || (checkoutModal.room.price * 2)}</span>
+                  <span>${checkoutModal.booking?.totalAmount || 400}</span>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '14px'}}>
                   <span>Room Service & Extras</span>
@@ -234,16 +266,13 @@ export default function ReceptionDashboard({ embedded }) {
                 </div>
                 <div style={{display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '18px', borderTop: '1px solid #ddd', paddingTop: '10px', marginTop: '10px', color: '#003580'}}>
                   <span>Total Due</span>
-                  <span>${((checkoutModal.booking?.totalAmount || (checkoutModal.room.price * 2)) + 45).toFixed(2)}</span>
+                  <span>${((checkoutModal.booking?.totalAmount || 400) + 45).toFixed(2)}</span>
                 </div>
               </div>
 
-              <p style={{fontSize: '12px', color: '#666', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px'}}>Present QR code to guest for payment</p>
-              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=HOS-CHECKOUT-${checkoutModal.room.id}`} alt="Checkout QR" style={{borderRadius: '8px', marginBottom: '20px'}} />
-
               <div style={{display: 'flex', gap: '12px'}}>
-                <button className="inv-btn-cancel" style={{flex: 1, padding: '12px', border: '1px solid #ddd', borderRadius: '8px', background: 'white', cursor: 'pointer', fontWeight: 'bold'}} onClick={() => setCheckoutModal(null)}>Cancel</button>
-                <button className="inv-btn-confirm" style={{flex: 2, padding: '12px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold'}} onClick={handleConfirmCheckout}>Complete Check-Out</button>
+                <button style={{flex: 1, padding: '12px', border: '1px solid #ddd', borderRadius: '8px', background: 'white', cursor: 'pointer', fontWeight: 'bold'}} onClick={() => setCheckoutModal(null)}>Cancel</button>
+                <button style={{flex: 2, padding: '12px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold'}} onClick={handleConfirmCheckout}>Complete Check-Out</button>
               </div>
             </div>
           </div>

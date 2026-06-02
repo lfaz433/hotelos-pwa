@@ -4,7 +4,7 @@ import { useHotel, timeAgo } from '../context/HotelContext'
 import './MaintenanceDashboard.css'
 
 export default function MaintenanceDashboard() {
-  const { maintenanceTickets, updateTicketStatus, addToast } = useHotel()
+  const { maintenanceTickets, updateTicketStatus, addToast, logout } = useHotel()
   const navigate = useNavigate()
   const [filter, setFilter] = useState('all')
 
@@ -65,7 +65,10 @@ export default function MaintenanceDashboard() {
           <div className="mdash-brand">
             <h1>🛠️ Maintenance & Engineering</h1>
           </div>
-          <button className="mdash-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
+          <div style={{display:'flex',gap:'12px',alignItems:'center'}}>
+            <button className="mdash-nav-back" onClick={() => navigate('/dashboard')}>← Back to Home</button>
+            <button onClick={logout} style={{padding:'6px 14px',background:'#fee2e2',color:'#dc2626',border:'none',borderRadius:'8px',fontWeight:'600',cursor:'pointer'}}>Log Out</button>
+          </div>
         </div>
       </header>
       

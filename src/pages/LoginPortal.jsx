@@ -43,8 +43,11 @@ export default function LoginPortal() {
       } else if (lowerUser === 'supervisor') {
         mockStaff = { id: 4, name: 'Ana P.', role: 'supervisor' }
         targetRoute = '/supervisor'
+      } else if (lowerUser === 'maintenance') {
+        mockStaff = { id: 5, name: 'Marco T.', role: 'maintenance' }
+        targetRoute = '/maintenance'
       } else if (lowerUser === 'inventory') {
-        mockStaff = { id: 5, name: 'David M.', role: 'inventory' }
+        mockStaff = { id: 6, name: 'David M.', role: 'inventory' }
         targetRoute = '/inventory'
       }
 
@@ -111,7 +114,34 @@ export default function LoginPortal() {
             </form>
             
             <div className="login-form-footer">
-              <p>Tip: Type <strong>manager</strong>, <strong>reception</strong>, <strong>supervisor</strong>, <strong>inventory</strong>, or <strong>housekeeper</strong> to test different roles.</p>
+              <p style={{marginBottom: '12px', color: '#888', fontSize: '13px'}}>Quick login — select your role:</p>
+              <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center'}}>
+                {[
+                  { label: '🏨 Manager', value: 'manager' },
+                  { label: '🛎 Reception', value: 'reception' },
+                  { label: '🧹 Housekeeper', value: 'housekeeper' },
+                  { label: '🛠 Maintenance', value: 'maintenance' },
+                ].map(role => (
+                  <button
+                    key={role.value}
+                    type="button"
+                    onClick={() => setUsername(role.value)}
+                    style={{
+                      padding: '6px 14px',
+                      borderRadius: '20px',
+                      border: '1px solid #dde3ee',
+                      background: username === role.value ? '#003580' : '#f4f7fb',
+                      color: username === role.value ? '#fff' : '#555',
+                      fontSize: '13px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s',
+                    }}
+                  >
+                    {role.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

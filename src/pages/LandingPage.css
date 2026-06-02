@@ -122,7 +122,7 @@
   cursor: pointer;
 }
 
-/* Glassmorphism — dim */
+/* Glassmorphism — dim (housekeeping) */
 .landing__card--hk {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.18);
@@ -130,7 +130,7 @@
   backdrop-filter: blur(12px);
 }
 
-/* Bright white — primary role */
+/* Bright white — manager */
 .landing__card--primary {
   background: rgba(255,255,255,0.95);
   border: 1px solid rgba(255,255,255,0.3);
@@ -138,7 +138,23 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.12);
 }
 
-/* Blue tint */
+/* Teal tint — front desk */
+.landing__card--reception {
+  background: rgba(0, 160, 130, 0.35);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  backdrop-filter: blur(12px);
+}
+
+/* Orange tint — maintenance */
+.landing__card--maintenance {
+  background: rgba(200, 100, 0, 0.35);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  backdrop-filter: blur(12px);
+}
+
+/* Blue tint — guest */
 .landing__card--guest {
   background: rgba(0, 113, 194, 0.35);
   border: 1px solid rgba(255,255,255,0.2);
@@ -150,9 +166,11 @@
   transform: translateY(-3px);
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
 }
-.landing__card--hk:hover { background: rgba(255,255,255,0.17); }
-.landing__card--primary:hover { background: #fff; }
-.landing__card--guest:hover { background: rgba(0, 113, 194, 0.55); }
+.landing__card--hk:hover       { background: rgba(255,255,255,0.17); }
+.landing__card--primary:hover  { background: #fff; }
+.landing__card--reception:hover { background: rgba(0, 160, 130, 0.55); }
+.landing__card--maintenance:hover { background: rgba(200, 100, 0, 0.55); }
+.landing__card--guest:hover    { background: rgba(0, 113, 194, 0.55); }
 
 /* ─── Card internals ─── */
 .landing__card-icon {
@@ -166,6 +184,8 @@
 }
 
 .landing__card--hk .landing__card-icon,
+.landing__card--reception .landing__card-icon,
+.landing__card--maintenance .landing__card-icon,
 .landing__card--guest .landing__card-icon {
   background: rgba(255,255,255,0.15);
   color: #fff;
@@ -261,25 +281,37 @@
   background: rgba(255,255,255,0.2);
 }
 
-/* ─── Desktop: 3-column grid ─── */
+/* ─── Desktop: 2+3 column grid ─── */
 @media (min-width: 680px) {
   .landing__cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-5);
   }
-  .landing__card {
+  /* First card (Manager) spans full width to make it stand out */
+  .landing__cards > a:first-child {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    padding-bottom: var(--space-5);
+  }
+  .landing__cards > a:not(:first-child) {
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
     padding-bottom: calc(var(--space-5) + 28px);
   }
-  .landing__card-arrow {
+  .landing__cards > a:not(:first-child) .landing__card-arrow {
     position: absolute;
     bottom: var(--space-5);
     right: var(--space-5);
   }
-  .landing__section-label {
-    text-align: left;
+}
+
+@media (min-width: 900px) {
+  .landing__cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .landing__cards > a:first-child {
+    grid-column: 1 / -1;
   }
 }

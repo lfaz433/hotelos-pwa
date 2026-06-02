@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useHotel } from '../context/HotelContext'
 import './LoginPortal.css'
 
@@ -7,7 +7,8 @@ export default function LoginPortal() {
   const { login } = useHotel()
   const navigate = useNavigate()
   
-  const [username, setUsername] = useState('')
+  const [searchParams] = useSearchParams()
+  const [username, setUsername] = useState(searchParams.get('role') || '')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')

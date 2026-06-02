@@ -4,7 +4,7 @@ import { useHotel } from '../../context/HotelContext'
 import './HKHeader.css'
 
 export default function HKHeader({ searchQuery, onSearchChange }) {
-  const { activeStaff, staff, setActiveStaff, notifications } = useHotel()
+  const { activeStaff, staff, setActiveStaff, notifications, logout } = useHotel()
   const [showStaffPicker, setShowStaffPicker] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
 
@@ -93,7 +93,22 @@ export default function HKHeader({ searchQuery, onSearchChange }) {
                 </button>
               ))}
             </div>
-            <button className="hk-modal-close" onClick={() => setShowStaffPicker(false)}>Close</button>
+            <div className="hk-staff-picker-footer" style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
+              <button 
+                className="hk-btn-logout" 
+                onClick={logout} 
+                style={{ flex: 1, padding: '12px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}
+              >
+                Log Out
+              </button>
+              <button 
+                className="hk-modal-close" 
+                onClick={() => setShowStaffPicker(false)}
+                style={{ flex: 1, marginTop: 0 }}
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -55,7 +55,6 @@ export default function DashboardApp() {
               {activeTab === 'frontdesk'     && <ReceptionDashboard embedded />}
               {activeTab === 'reservations'  && <DBReservationsTab />}
               {activeTab === 'analytics'     && <AnalyticsDashboard embedded />}
-              {activeTab === 'housekeeping'  && <SupervisorDashboard embedded />}
               {activeTab === 'inventory'     && <InventoryDashboard embedded />}
               {activeTab === 'templates'     && <DBTemplateManager />}
               {activeTab === 'room_types'    && <DBRoomTypesTab />}

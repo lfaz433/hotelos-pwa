@@ -4,15 +4,14 @@ import { useHotel } from '../../context/HotelContext'
 import './DBNavBar.css'
 
 const ALL_TABS = [
-  { key: 'overview',      label: 'Overview', showFor: ['manager'] },
-  { key: 'frontdesk',     label: 'Front Desk', showFor: ['manager', 'reception'] },
-  { key: 'reservations',  label: 'Reservations', showFor: ['manager', 'reception'] },
-  { key: 'housekeeping',  label: 'Housekeeping', showFor: ['manager'] },
-  { key: 'inventory',     label: 'Inventory & Audit', showFor: ['manager'] },
-  { key: 'analytics',     label: 'Analytics', showFor: ['manager'] },
-  { key: 'templates',     label: 'Template Manager', showFor: ['manager'] },
-  { key: 'room_types',    label: 'Room Types', showFor: ['manager'] },
-  { key: 'settings',      label: 'Settings', showFor: ['manager'] },
+  { key: 'overview',      label: 'Overview',           showFor: ['manager'] },
+  { key: 'frontdesk',     label: 'Front Desk',          showFor: ['manager', 'reception'] },
+  { key: 'reservations',  label: 'Reservations',        showFor: ['manager', 'reception'] },
+  { key: 'inventory',     label: 'Inventory & Audit',   showFor: ['manager'] },
+  { key: 'analytics',     label: 'Analytics',           showFor: ['manager'] },
+  { key: 'templates',     label: 'Template Manager',    showFor: ['manager'] },
+  { key: 'room_types',    label: 'Room Types',          showFor: ['manager'] },
+  { key: 'settings',      label: 'Settings',            showFor: ['manager'] },
 ]
 
 export default function DBNavBar({ activeTab, onTabChange }) {

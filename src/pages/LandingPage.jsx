@@ -23,6 +23,10 @@ export default function LandingPage() {
           Real-time room status. Zero friction.
         </p>
 
+        <Link to="/booking" className="landing__btn-primary">
+          Open Booking Portal
+        </Link>
+
         <div className="landing__cards">
           <Link to="/housekeeping" className="landing__card landing__card--hk" id="btn-housekeeping">
             <div className="landing__card-icon">

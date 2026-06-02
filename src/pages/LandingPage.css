@@ -63,6 +63,28 @@
   margin-top: -var(--space-4);
 }
 
+.landing__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  background: #fff;
+  color: #003580;
+  font-weight: 700;
+  font-size: var(--text-md);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  margin-top: calc(-1 * var(--space-4));
+  margin-bottom: var(--space-4);
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.landing__btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
 .landing__cards {
   display: flex;
   flex-direction: column;

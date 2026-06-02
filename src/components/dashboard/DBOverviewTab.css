@@ -1,0 +1,181 @@
+.db-overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.db-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.db-kpi-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  transition: box-shadow var(--transition), transform var(--transition);
+  animation: fadeIn 0.3s ease both;
+}
+
+.db-kpi-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.db-kpi-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.db-kpi-body { flex: 1; min-width: 0; }
+
+.db-kpi-value {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.db-kpi-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.db-kpi-sub {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Status bar */
+.db-status-bar {
+  display: flex;
+  height: 10px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--bg);
+  margin-bottom: var(--space-4);
+}
+
+.db-status-bar__segment {
+  height: 100%;
+  transition: width 0.5s ease;
+  cursor: pointer;
+}
+
+.db-status-bar__segment + .db-status-bar__segment {
+  margin-left: 1px;
+}
+
+.db-status-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.db-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.db-legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.db-legend-label { color: var(--text-secondary); }
+
+.db-legend-count {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Arrivals table */
+.db-arrivals-table {
+  overflow-x: auto;
+}
+
+.db-arrivals-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.db-arrivals-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.db-arrivals-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.db-arrivals-table tr:last-child td { border-bottom: none; }
+.db-arrivals-table tr:hover td { background: var(--bg); }
+
+.db-tbl-room { font-weight: 700; font-size: var(--text-base); }
+.db-tbl-guest { font-weight: 500; }
+.db-tbl-mono { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); }
+
+.db-booking-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.db-booking-badge.arriving { background: #fff8e1; color: #f57c00; }
+.db-booking-badge.active   { background: #e8f5e9; color: #2e7d32; }
+.db-booking-badge.upcoming { background: var(--brand-light); color: var(--brand-action); }
+
+.db-card-subtitle {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.db-link-btn {
+  background: none;
+  border: none;
+  color: var(--brand-action);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+.db-link-btn:hover { opacity: 0.75; }
+
+@media (max-width: 1100px) {
+  .db-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .db-kpi-grid { grid-template-columns: 1fr; }
+}

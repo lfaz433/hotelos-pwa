@@ -1,0 +1,272 @@
+.guest-portal {
+  min-height: 100vh;
+  background: var(--bg-primary, #f4f7f6);
+  color: var(--text-primary, #1a1a1a);
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.gp-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.gp-login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.gp-login-card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.gp-login-card p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.gp-input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.gp-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.gp-input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.gp-input-group input:focus {
+  border-color: #003580;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 53, 128, 0.1);
+}
+
+.gp-btn-login {
+  width: 100%;
+  background: #003580;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.gp-btn-login:hover {
+  background: #00235a;
+}
+
+.gp-btn-login:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.gp-error {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* App Header */
+.gp-header {
+  background: #003580;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gp-header-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.gp-logout {
+  color: white;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Dashboard Body */
+.gp-body {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gp-welcome {
+  margin-bottom: 30px;
+}
+
+.gp-welcome h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.gp-welcome p {
+  color: #666;
+}
+
+/* Cards */
+.gp-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.gp-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gp-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.gp-action-btn {
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.gp-action-btn:hover {
+  background: #eef2f6;
+  border-color: #d1d9e6;
+  transform: translateY(-2px);
+}
+
+.gp-action-icon {
+  font-size: 1.5rem;
+}
+
+.gp-action-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Bill */
+.gp-bill-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.gp-bill-row:last-child {
+  border-bottom: none;
+}
+
+.gp-bill-total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid #ddd;
+}
+
+@media (max-width: 600px) {
+  .gp-action-grid {
+    grid-template-columns: 1fr;
+  }
+  .gp-login-card {
+    padding: 20px;
+  }
+  .gp-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+/* Modal Styles */
+.gp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.gp-modal-card {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: scaleIn 0.2s ease-out;
+}
+
+.gp-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.gp-modal-header h3 {
+  margin: 0;
+  color: #003580;
+  font-size: 1.2rem;
+}
+
+.gp-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.gp-modal-body {
+  padding: 20px;
+}

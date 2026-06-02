@@ -1,0 +1,126 @@
+/* Imports the base luxury styles from Reception Dashboard to maintain the premium white/blue theme */
+@import './ReceptionDashboard.css';
+
+/* Supervisor Specific Overrides / Additions */
+
+.sup-card {
+  height: 100%;
+  justify-content: space-between;
+}
+
+.sup-action-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--lux-card-border);
+}
+
+.sup-info-bar {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--lux-card-border);
+  font-size: 13px;
+  color: var(--lux-text-muted);
+}
+
+.sup-info-bar strong {
+  color: var(--lux-primary);
+  font-weight: 600;
+}
+
+.sup-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.sup-reject {
+  background: white;
+  border: 1px solid var(--lux-status-dirty);
+  color: var(--lux-status-dirty);
+}
+
+.sup-reject:hover {
+  background: var(--lux-status-dirty);
+  color: white;
+}
+
+.sup-approve {
+  background: var(--lux-status-ready);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.sup-approve:hover {
+  background: #059669; /* slightly darker emerald */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.sup-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--lux-text-muted);
+}
+
+.sup-empty-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  opacity: 0.5;
+}
+
+.sup-empty-state h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--lux-primary);
+  margin: 0 0 8px 0;
+}
+
+/* Staff Sidebar Updates */
+.sup-staff-item {
+  align-items: flex-start;
+}
+
+.sup-staff-icon {
+  background: var(--lux-primary-light);
+  color: var(--lux-primary);
+  font-weight: 700;
+}
+
+.sup-progress-wrapper {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sup-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--lux-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sup-progress-fill {
+  height: 100%;
+  background: var(--lux-status-ready);
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sup-progress-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lux-text-main);
+}

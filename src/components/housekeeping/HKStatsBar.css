@@ -1,0 +1,40 @@
+.hk-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-3) 0;
+}
+
+.hk-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2) var(--space-1);
+  position: relative;
+}
+
+.hk-stat + .hk-stat::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: var(--border);
+}
+
+.hk-stat__num {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--stat-color, var(--text-primary));
+  line-height: 1;
+}
+
+.hk-stat__label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
